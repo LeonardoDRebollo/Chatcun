@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  * @author djclu
  */
 public class VUsuario extends javax.swing.JFrame {
-
+public String usuario;
     /**
      * Creates new form VUsuario
      */
-    public VUsuario() {
+    public VUsuario(String nombreUsuario) {
         initComponents();
-        
-        
+        usuario = nombreUsuario;
+        LbUser.setText(usuario);
         DefaultTableModel conectados = (DefaultTableModel) jTable1.getModel();
         HiloUsuario us = new HiloUsuario(conectados);
         us.start();
@@ -44,15 +44,19 @@ public class VUsuario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtMen = new javax.swing.JTextArea();
         BtnEnvia = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        LbUser = new javax.swing.JLabel();
+        BtnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1"
+                ""
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -78,6 +82,38 @@ public class VUsuario extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        LbUser.setText("null");
+
+        BtnSalir.setText("Salir");
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BtnSalir)
+                .addGap(18, 18, 18)
+                .addComponent(LbUser)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnSalir)
+                    .addComponent(LbUser))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,11 +131,13 @@ public class VUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
@@ -109,7 +147,7 @@ public class VUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnEnvia)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -123,7 +161,7 @@ public class VUsuario extends javax.swing.JFrame {
         try {
 				Socket conecta = new Socket("192.168.1.67",1211);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
-                                String cadena = TxtMen.getText() + ',' + ip;
+                                String cadena = usuario + ": " + TxtMen.getText() + ',' + ip;
 				manda.writeUTF(cadena);
 				manda.close();
 			} catch (UnknownHostException e0) {
@@ -139,6 +177,31 @@ public class VUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         TxtMen.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+         Socket conecta;
+			try {
+				conecta = new Socket("192.168.1.67",1212);
+				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
+                                String paquete = usuario + ",se ha desconectado";
+				manda.writeUTF(paquete);
+				manda.close();
+			} catch (UnknownHostException e0) {
+				// TODO Auto-generated catch block
+				e0.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+                                Login lg = new Login();
+        lg.show();
+        this.dispose();
+    }//GEN-LAST:event_BtnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,17 +232,23 @@ public class VUsuario extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VUsuario().setVisible(true);
+           public void run() {
+                String nombreDeUsuario = null;
+                VUsuario us = new VUsuario(nombreDeUsuario);
+                
+                us.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEnvia;
+    private javax.swing.JButton BtnSalir;
+    private javax.swing.JLabel LbUser;
     private javax.swing.JTextArea TxtMen;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

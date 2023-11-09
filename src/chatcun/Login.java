@@ -185,7 +185,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Acceso correcto");  
              Socket conecta;
 			try {
-				conecta = new Socket("192.168.1.67",1211);
+				conecta = new Socket("192.168.1.67",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
 				manda.writeUTF(TxtUsuario.getText());
 				manda.close();
@@ -196,7 +196,7 @@ public class Login extends javax.swing.JFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            VUsuario h = new VUsuario();   //VUsuario h = new VUsuario(txtUsername.getText());
+            VUsuario h = new VUsuario(TxtUsuario.getText());
             h.setVisible(true);
            
             // Cierra el formulario de inicio de sesión solo si el acceso es correcto
