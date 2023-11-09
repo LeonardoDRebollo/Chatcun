@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
 
             timer.setRepeats(false); // Evita que el temporizador se repita
             timer.start();
-
+ 
             JOptionPane.showMessageDialog(null, "Acceso correcto");  
              Socket conecta;
 			try {

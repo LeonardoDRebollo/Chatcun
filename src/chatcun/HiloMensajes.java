@@ -36,7 +36,7 @@ public void run(){
                         String[] partes = texto.split(",");
                         try {
 				Socket conecta2 = new Socket(partes[1],1212);
-				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
+				DataOutputStream manda = new DataOutputStream(conecta2.getOutputStream());
 				manda.writeUTF(partes[0]);
 				manda.close();
 			} catch (UnknownHostException e0) {
@@ -46,8 +46,6 @@ public void run(){
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-                        System.out.println(texto);
-                        int columna = 1;
 	        	conecta.close();
 	        	
 	        }
