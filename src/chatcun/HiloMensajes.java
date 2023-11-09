@@ -39,6 +39,13 @@ public void run(){
 				DataOutputStream manda = new DataOutputStream(conecta2.getOutputStream());
 				manda.writeUTF(partes[0]);
 				manda.close();
+                                conecta2.close();
+                                
+                                Socket conecta3 = new Socket(ip,1212);
+				DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
+				manda2.writeUTF(partes[0]);
+				manda2.close();
+                                conecta3.close();
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
 				e0.printStackTrace();
@@ -46,6 +53,7 @@ public void run(){
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+                     
 	        	conecta.close();
 	        	
 	        }

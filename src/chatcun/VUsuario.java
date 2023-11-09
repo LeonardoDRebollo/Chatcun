@@ -39,7 +39,7 @@ public String usuario;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CBDirec = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtMen = new javax.swing.JTextArea();
@@ -50,7 +50,7 @@ public String usuario;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -59,9 +59,11 @@ public String usuario;
                 ""
             }
         ));
+        jTable1.setEnabled(false);
+        jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBDirec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "192.168.1.71" }));
 
         jButton1.setText("Seleccionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +129,7 @@ public String usuario;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnEnvia))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CBDirec, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -139,7 +141,7 @@ public String usuario;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBDirec, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,13 +158,14 @@ public String usuario;
     private void BtnEnviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviaActionPerformed
         // TODO add your handling code here:
         
-        String ip = "192.168.1.71";
+        String ip = CBDirec.getSelectedItem().toString();
         
         try {
 				Socket conecta = new Socket("192.168.1.67",1211);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String cadena = usuario + ": " + TxtMen.getText() + ',' + ip;
 				manda.writeUTF(cadena);
+                                TxtMen.setText("");
 				manda.close();
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
@@ -244,10 +247,10 @@ public String usuario;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEnvia;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JComboBox<String> CBDirec;
     private javax.swing.JLabel LbUser;
     private javax.swing.JTextArea TxtMen;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
