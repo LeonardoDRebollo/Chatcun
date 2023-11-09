@@ -22,6 +22,8 @@ public class VServer extends javax.swing.JFrame {
         DefaultTableModel conectados = (DefaultTableModel) jTable1.getModel();
         HiloS miHilo = new HiloS(conectados);
         miHilo.start();
+        HiloMensajes men = new HiloMensajes();
+        men.start();
     }
 
     /**

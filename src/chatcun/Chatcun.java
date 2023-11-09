@@ -15,11 +15,11 @@ public class Chatcun {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //Login log = new Login();
-        //log.show();
+        Login log = new Login();
+        log.show();
         
-        VServer s = new VServer();
-        s.show();
+        //VServer s = new VServer();
+        //s.show();
        
     }
     
