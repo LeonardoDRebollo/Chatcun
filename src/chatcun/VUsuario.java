@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +21,11 @@ public class VUsuario extends javax.swing.JFrame {
      */
     public VUsuario() {
         initComponents();
+        
+        
+        DefaultTableModel conectados = (DefaultTableModel) jTable1.getModel();
+        HiloUsuario us = new HiloUsuario(conectados);
+        us.start();
     }
 
     /**
@@ -54,6 +60,11 @@ public class VUsuario extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Seleccionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         TxtMen.setColumns(20);
         TxtMen.setLineWrap(true);
@@ -123,6 +134,11 @@ public class VUsuario extends javax.swing.JFrame {
 				e1.printStackTrace();
 			}
     }//GEN-LAST:event_BtnEnviaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        TxtMen.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

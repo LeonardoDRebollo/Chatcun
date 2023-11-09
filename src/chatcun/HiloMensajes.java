@@ -33,6 +33,20 @@ public void run(){
 	        	String texto;
 	        	texto=recibe.readUTF();   
                         System.out.println(texto);
+                        String[] partes = texto.split(",");
+                        try {
+				Socket conecta2 = new Socket(partes[1],1212);
+				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
+				manda.writeUTF(partes[0]);
+				manda.close();
+			} catch (UnknownHostException e0) {
+				// TODO Auto-generated catch block
+				e0.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+                        System.out.println(texto);
                         int columna = 1;
 	        	conecta.close();
 	        	
