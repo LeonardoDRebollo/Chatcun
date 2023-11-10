@@ -8,6 +8,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VUsuario extends javax.swing.JFrame {
 public String usuario;
+private JComboBox<String> comboBox;
+ private DefaultComboBoxModel<String> comboBoxModel;
     /**
      * Creates new form VUsuario
      */
@@ -23,8 +27,10 @@ public String usuario;
         initComponents();
         usuario = nombreUsuario;
         LbUser.setText(usuario);
+        comboBoxModel = new DefaultComboBoxModel<>();
+        CBDirec.setModel(comboBoxModel);
         DefaultTableModel conectados = (DefaultTableModel) jTable1.getModel();
-        HiloUsuario us = new HiloUsuario(conectados);
+        HiloUsuario us = new HiloUsuario(conectados,comboBoxModel);
         us.start();
     }
 

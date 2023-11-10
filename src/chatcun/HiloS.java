@@ -60,7 +60,11 @@ public class HiloS extends Thread {
 				e1.printStackTrace();
 			} }*/
 	        	conecta.close();
-	        	
+	        	 Socket conecta3 = new Socket(ip,1213);
+				DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
+				manda2.writeUTF(ip);
+				manda2.close();
+                        conecta3.close();
 	        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
