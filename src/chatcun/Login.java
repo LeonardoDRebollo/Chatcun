@@ -110,6 +110,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        TxtUsuario.setText("leni");
+
+        TxtPass.setText("123");
         TxtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtPassActionPerformed(evt);
@@ -185,7 +188,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Acceso correcto");  
              Socket conecta;
 			try {
-				conecta = new Socket("192.168.1.67",1212);
+				conecta = new Socket("192.168.1.70",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
 				manda.writeUTF(TxtUsuario.getText());
 				manda.close();

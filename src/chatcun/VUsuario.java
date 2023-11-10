@@ -30,8 +30,11 @@ private JComboBox<String> comboBox;
         comboBoxModel = new DefaultComboBoxModel<>();
         CBDirec.setModel(comboBoxModel);
         DefaultTableModel conectados = (DefaultTableModel) jTable1.getModel();
-        HiloUsuario us = new HiloUsuario(conectados,comboBoxModel);
+        HiloUsuario us = new HiloUsuario(conectados);
         us.start();
+        
+        HiloUsuario2 hilo2 = new HiloUsuario2(comboBoxModel);
+        hilo2.start();
     }
 
     /**
@@ -68,8 +71,6 @@ private JComboBox<String> comboBox;
         jTable1.setEnabled(false);
         jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
-
-        CBDirec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "192.168.1.71" }));
 
         jButton1.setText("Seleccionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +168,7 @@ private JComboBox<String> comboBox;
         String ip = CBDirec.getSelectedItem().toString();
         
         try {
-				Socket conecta = new Socket("192.168.1.67",1211);
+				Socket conecta = new Socket("192.168.1.70",1211);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String cadena = usuario + ": " + TxtMen.getText() + ',' + ip;
 				manda.writeUTF(cadena);

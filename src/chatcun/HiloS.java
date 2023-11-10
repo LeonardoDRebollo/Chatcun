@@ -27,7 +27,7 @@ public class HiloS extends Thread {
     
     public void run() {
 		try {
-			ServerSocket servidor = new ServerSocket(1211);
+			ServerSocket servidor = new ServerSocket(1212);
 	        while(true) {
 	        	Socket conecta = servidor.accept();
 	        	String ip;

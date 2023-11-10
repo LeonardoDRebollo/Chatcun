@@ -20,12 +20,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HiloUsuario extends Thread {
     private DefaultTableModel menModel;
-    private JComboBox<String> comboBox;
-    private DefaultComboBoxModel<String> comboBoxModel;
 
-    public HiloUsuario(DefaultTableModel menModel,DefaultComboBoxModel comboBoxModel) {
+    public HiloUsuario(DefaultTableModel menModel) {
         this.menModel = menModel;
-        this.comboBoxModel = comboBoxModel;
     }
     public void run(){
         try {
@@ -44,25 +41,6 @@ public class HiloUsuario extends Thread {
 			e.printStackTrace();
 		}
         
-        
-        try {
-        ServerSocket servidor = new ServerSocket(1213);
-        while (true) {
-            Socket conecta = servidor.accept();
-            DataInputStream recibe = new DataInputStream(conecta.getInputStream());
-            String texto = recibe.readUTF();
-
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    comboBoxModel.addElement(texto);
-                }
-            });
-
-            conecta.close();
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
     }
     
 }
