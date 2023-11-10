@@ -39,32 +39,27 @@ public class HiloS extends Thread {
 	        	texto=recibe.readUTF();
                         UsuariosModel.addRow(new Object[]{ texto,ip});                        
                         int columna = 1;
-			/*try {
-                            int filas = ConectadoModel.getRowCount();
+			try {
+                            int filas =  UsuariosModel.getRowCount();
                            for (int fila = 0; fila < filas; fila++) {
-                            Object dato = ConectadoModel.getValueAt(fila, columna);
-                            Socket conecta2 = new Socket(dato.toString(),1211);
-                            DataOutputStream manda2 = new DataOutputStream(conecta2.getOutputStream());
-		            manda2.writeUTF(texto);
-                            System.out.println("Mensaje enviado a: " + dato.toString());
-                            manda2.close();
-                            conecta2.close();
+                            Object dato =  UsuariosModel.getValueAt(fila, columna);
+                            Socket conecta3 = new Socket(dato.toString(),1213);
+				DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
+				manda2.writeUTF(ip);
+				manda2.close();
+                            conecta3.close();
                       
 				
-				
+                           }
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
 				e0.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} }*/
+			} 
 	        	conecta.close();
-	        	 Socket conecta3 = new Socket(ip,1213);
-				DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
-				manda2.writeUTF(ip);
-				manda2.close();
-                        conecta3.close();
+	        	
 	        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
