@@ -190,17 +190,17 @@ private JComboBox<String> comboBox;
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         // TODO add your handling code here:
+
         
-        
-        
-        
-         Socket conecta;
+            
+   
 			try {
-				conecta = new Socket("192.168.1.67",1212);
+			Socket conecta = new Socket("192.168.1.67",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String paquete = usuario + ",se ha desconectado";
 				manda.writeUTF(paquete);
 				manda.close();
+                            conecta.close();    
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
 				e0.printStackTrace();
@@ -208,7 +208,8 @@ private JComboBox<String> comboBox;
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-                                Login lg = new Login();
+                     
+        Login lg = new Login();
         lg.show();
         this.dispose();
     }//GEN-LAST:event_BtnSalirActionPerformed

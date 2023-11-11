@@ -37,7 +37,25 @@ public class HiloS extends Thread {
 	        	DataInputStream recibe = new DataInputStream(conecta.getInputStream());
 	        	String texto;
 	        	texto=recibe.readUTF();
-                        UsuariosModel.addRow(new Object[]{ texto,ip});                        
+                      String[] partes = texto.split(",");
+                      String desconectado = "";
+                      if (partes.length > 1) {
+                        desconectado = partes[1].trim();
+                        System.out.println(desconectado);
+                      }
+                     if (!desconectado.equals("se ha desconectado")) {
+                       UsuariosModel.addRow(new Object[]{ partes[0],ip});  
+                      }
+                     if (desconectado.equals("se ha desconectado")) {
+                   
+                    for (int fila = 0; fila < UsuariosModel.getRowCount(); fila++) {
+                   Object valorEnSegundaColumna = UsuariosModel.getValueAt(fila, 1);
+                    if (valorEnSegundaColumna != null && valorEnSegundaColumna.toString().equals(ip)) {
+                   UsuariosModel.removeRow(fila);
+                   break;
+                     }
+                    }
+                      }                     
                         int columna = 1;
 			try {
                             int filas =  UsuariosModel.getRowCount();

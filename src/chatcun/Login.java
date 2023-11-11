@@ -190,7 +190,8 @@ public class Login extends javax.swing.JFrame {
 			try {
 				conecta = new Socket("192.168.1.70",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
-				manda.writeUTF(TxtUsuario.getText());
+                                String envio = TxtUsuario.getText() + "se ha conectado";
+				manda.writeUTF(envio);
 				manda.close();
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
