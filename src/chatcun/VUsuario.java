@@ -166,8 +166,7 @@ private JComboBox<String> comboBox;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEnviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviaActionPerformed
-        // TODO add your handling code here:
-        
+
         String cn = CBDirec.getSelectedItem().toString();
         String[] partes = cn.split(",");
         
@@ -194,11 +193,7 @@ private JComboBox<String> comboBox;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-        // TODO add your handling code here:
 
-        
-            
-   
 			try {
 			Socket conecta = new Socket("192.168.1.70",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());

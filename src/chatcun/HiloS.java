@@ -46,12 +46,9 @@ public class HiloS extends Thread {
                        UsuariosModel.addRow(new Object[]{ partes[0],ip});  
                        System.out.println(partes[0].trim());
 try {
-    // Itera sobre cada fila de la tabla
     for (int fila1 = 0; fila1 < UsuariosModel.getRowCount(); fila1++) {
         Object dato1 = UsuariosModel.getValueAt(fila1, 1);
         System.out.println("Enviando a: " + dato1);
-       
-        // Envía datos desde la IP actual a todas las demás IPs
         for (int fila2 = 0; fila2 < UsuariosModel.getRowCount(); fila2++) {
 
              Socket conecta1 = new Socket(dato1.toString(), 1213);
@@ -64,18 +61,11 @@ try {
                 manda1.close();
         conecta1.close();
         }
-        // Cierra el flujo de salida y la conexión después de enviar datos
-        
         System.out.println("Conexión cerrada para: " + dato1);
     }
 } catch (IOException e) {
     e.printStackTrace();
 }
-
-
-
-
- 
                       }
                      if (desconectado.equals("se ha desconectado")) {
                    

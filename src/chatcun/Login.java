@@ -30,37 +30,24 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-    
-    
-    //LOGIN METHOD
-    
     String Username, Password; 
-    private int intentosFallidos = 0; // Variable para llevar el control de intentos fallidos
-    
     boolean logic(String user, String pass) {
-           // Utiliza una ruta relativa desde la ubicación de tu proyecto.
            String directorioActual = System.getProperty("user.dir");
             String rutaArchivo = "src/chatcun/Usuarios.txt";
            
             File file = new File(directorioActual, rutaArchivo);
         try {
-            //Acceder al archivo
             RandomAccessFile raf = new RandomAccessFile(file, "rw");
-
-            String line;
+           String line;
             while ((line = raf.readLine()) != null) {
                 if (line.startsWith("Username:")) {
-                    // Verificar si la línea tiene suficientes caracteres
                     if (line.length() > 9) {
                         Username = line.substring(9).trim();
                     } else {
                         Username = "";
                     }
-
-                    // Leer la siguiente línea
                     line = raf.readLine();
 
-                    // Verificar si la siguiente línea tiene suficientes caracteres
                     if (line != null && line.length() > 9) {
                         Password = line.substring(9).trim();
                     } else {
@@ -72,7 +59,7 @@ public class Login extends javax.swing.JFrame {
                     System.out.println("Password input: " + pass);
 
                     if (user.trim().equalsIgnoreCase(Username) && pass.equals(Password)) {
-                        return true; // Credenciales correctas
+                        return true;
                     }
                 }
             }
@@ -83,7 +70,7 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return false; // Credenciales incorrectas
+        return false;
     }
     
 
@@ -161,31 +148,23 @@ public class Login extends javax.swing.JFrame {
         
            String username = TxtUsuario.getText();
         String password = TxtPass.getText();
-
-        // Verifica que los campos no estén vacíos
         if (username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete ambos campos.");
-            return; // Sale del método si los campos están vacíos
+            JOptionPane.showMessageDialog(null, "Uno de los campos esta vacio");
+            return; 
         }
-
-        // Continúa con la lógica de inicio de sesión
         boolean accesoCorrecto = logic(username, password);
 
         if (accesoCorrecto) {
              String nombreDeUsuario = TxtUsuario.getText();
-            // Crea un temporizador para cerrar el JOptionPane después de 2 segundos (por ejemplo)
             Timer timer = new Timer(500, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Cierra el JOptionPane después de 2 segundos
                     JOptionPane.getRootFrame().dispose();
                 }
             });
 
-            timer.setRepeats(false); // Evita que el temporizador se repita
+            timer.setRepeats(false); 
             timer.start();
- 
-            JOptionPane.showMessageDialog(null, "Acceso correcto");  
 
 			try {
 				 Socket conecta = new Socket("192.168.1.70",1212);
@@ -204,18 +183,10 @@ public class Login extends javax.swing.JFrame {
            
             VUsuario h = new VUsuario(TxtUsuario.getText());
             h.setVisible(true);
-           
-            // Cierra el formulario de inicio de sesión solo si el acceso es correcto
             this.dispose();
         } else {
-           JOptionPane.showMessageDialog(null, "Contraseña/usuario incorrectos");
-        }
-        
-        
-        
-        
-        
-        
+           JOptionPane.showMessageDialog(null, "La contraseñao el usuario es incorrecto");
+        }     
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void TxtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPassActionPerformed
