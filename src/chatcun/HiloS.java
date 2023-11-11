@@ -41,10 +41,22 @@ public class HiloS extends Thread {
                       String desconectado = "";
                       if (partes.length > 1) {
                         desconectado = partes[1].trim();
-                        System.out.println(desconectado);
                       }
                      if (!desconectado.equals("se ha desconectado")) {
                        UsuariosModel.addRow(new Object[]{ partes[0],ip});  
+                           int columna = 1;
+			int filas = UsuariosModel.getRowCount();
+                   for (int fila = 0; fila < filas; fila++) {
+                     Object dato = UsuariosModel.getValueAt(fila, columna);
+                          Socket conecta3 = new Socket(dato.toString(), 1213);
+                      try {
+                             DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
+                      manda2.writeUTF(dato.toString());
+                   } finally {
+        conecta3.close();
+    }
+}
+ 
                       }
                      if (desconectado.equals("se ha desconectado")) {
                    
@@ -56,26 +68,7 @@ public class HiloS extends Thread {
                      }
                     }
                       }                     
-                        int columna = 1;
-			try {
-                            int filas =  UsuariosModel.getRowCount();
-                           for (int fila = 0; fila < filas; fila++) {
-                            Object dato =  UsuariosModel.getValueAt(fila, columna);
-                            Socket conecta3 = new Socket(dato.toString(),1213);
-				DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
-				manda2.writeUTF(ip);
-				manda2.close();
-                            conecta3.close();
-                      
-				
-                           }
-			} catch (UnknownHostException e0) {
-				// TODO Auto-generated catch block
-				e0.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} 
+                    
 	        	conecta.close();
 	        	
 	        }
