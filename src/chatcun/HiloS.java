@@ -49,13 +49,17 @@ public class HiloS extends Thread {
                    for (int fila = 0; fila < filas; fila++) {
                      Object dato = UsuariosModel.getValueAt(fila, columna);
                           Socket conecta3 = new Socket(dato.toString(), 1213);
-                      try {
+                          for (int fila2 = 0; fila2 < filas; fila2++) {
+                                   try {
                              DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
-                      manda2.writeUTF(dato.toString());
-                   } finally {
-        conecta3.close();
-    }
-}
+                          manda2.writeUTF(dato.toString());
+                        } finally {
+                             conecta3.close();
+                          }
+                              
+                          }
+                    
+                 }
  
                       }
                      if (desconectado.equals("se ha desconectado")) {
