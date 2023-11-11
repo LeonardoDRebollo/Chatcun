@@ -23,15 +23,7 @@ public class HiloUsuario2 extends Thread {
                 Socket conecta = servidor.accept();
                 DataInputStream recibe = new DataInputStream(conecta.getInputStream());
                 String texto = recibe.readUTF();
-
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        // Limpia el modelo antes de añadir el nuevo elemento
-                        comboBoxModel.addElement(texto);
-                    }
-                });
-
-                // No cerramos la conexión aquí para seguir recibiendo datos
+                comboBoxModel.addElement(texto);
             }
         } catch (IOException e) {
             // Manejar la excepción apropiadamente
