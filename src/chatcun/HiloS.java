@@ -44,6 +44,7 @@ public class HiloS extends Thread {
                       }
                      if (!desconectado.equals("se ha desconectado")) {
                        UsuariosModel.addRow(new Object[]{ partes[0],ip});  
+                       System.out.println(partes[0]);
 try {
     // Itera sobre cada fila de la tabla
     for (int fila1 = 0; fila1 < UsuariosModel.getRowCount(); fila1++) {
@@ -56,7 +57,9 @@ try {
              Socket conecta1 = new Socket(dato1.toString(), 1213);
          DataOutputStream manda1 = new DataOutputStream(conecta1.getOutputStream());
                 Object dato2 = UsuariosModel.getValueAt(fila2, 1);
-                manda1.writeUTF(dato2.toString());
+                Object dato3 = UsuariosModel.getValueAt(fila2, 0);
+                String cn = dato3 + "," + dato2;
+                manda1.writeUTF(cn);
                 System.out.println("Enviando la ip: " + dato2 + " a: " + dato1);   
                 manda1.close();
         conecta1.close();

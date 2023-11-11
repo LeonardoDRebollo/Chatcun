@@ -168,12 +168,13 @@ private JComboBox<String> comboBox;
     private void BtnEnviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviaActionPerformed
         // TODO add your handling code here:
         
-        String ip = CBDirec.getSelectedItem().toString();
+        String cn = CBDirec.getSelectedItem().toString();
+        String[] partes = cn.split(",");
         
         try {
 				Socket conecta = new Socket("192.168.1.70",1211);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
-                                String cadena = usuario + ": " + TxtMen.getText() + ',' + ip;
+                                String cadena = usuario + ": " + TxtMen.getText() + ',' + partes[1];
 				manda.writeUTF(cadena);
                                 TxtMen.setText("");
 				manda.close();
