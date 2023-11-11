@@ -28,23 +28,25 @@ private DefaultComboBoxModel<String> comboBoxModel;
     }
     public void run(){
           
-        try {
-        ServerSocket servidor2 = new ServerSocket(1213);
-        while (true) {
-            Socket conecta2 = servidor2.accept();
-            DataInputStream recibe = new DataInputStream(conecta2.getInputStream());
-            String texto = recibe.readUTF();
+    try {
+    ServerSocket servidor = new ServerSocket(1213);
+    while (true) {
+        Socket conecta = servidor.accept();
+        DataInputStream recibe = new DataInputStream(conecta.getInputStream());
+        String texto = recibe.readUTF();
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    comboBoxModel.addElement(texto);
-                }
-            });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                comboBoxModel.addElement(texto);
+            }
+        });
 
-            conecta2.close();
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
+        // No cerramos la conexión aquí para seguir recibiendo datos
     }
+} catch (IOException e) {
+    // Manejar la excepción apropiadamente
+    e.printStackTrace();
+}
+
     }
 }
