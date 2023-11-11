@@ -55,15 +55,8 @@ try {
         // Envía datos desde la IP actual a todas las demás IPs
         for (int fila2 = 0; fila2 < numFilas; fila2++) {
                 Object dato2 = UsuariosModel.getValueAt(fila2, 1);
-                if (dato2.equals(dato1)){
-                              System.out.println("Se envio un mensaje a: " + dato1);
-                    manda1.writeUTF("usuarios conectados");
-                }else{
                 manda1.writeUTF(dato2.toString());
-                System.out.println("Enviando la ip: " + dato2 + " a: " + dato1);
-                }
-
-            
+                System.out.println("Enviando la ip: " + dato2 + " a: " + dato1);   
         }
         // Cierra el flujo de salida y la conexión después de enviar datos
         manda1.close();
