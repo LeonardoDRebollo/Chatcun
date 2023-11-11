@@ -190,7 +190,7 @@ public class Login extends javax.swing.JFrame {
 			try {
 				 Socket conecta = new Socket("192.168.1.70",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
-                                String envio = TxtUsuario.getText() + "se ha conectado";
+                                String envio = TxtUsuario.getText() + ","+"se ha conectado";
 				manda.writeUTF(envio);
 				manda.close();
                                  conecta.close();
