@@ -56,11 +56,8 @@ try {
              Socket conecta1 = new Socket(dato1.toString(), 1213);
          DataOutputStream manda1 = new DataOutputStream(conecta1.getOutputStream());
                 Object dato2 = UsuariosModel.getValueAt(fila2, 1);
-                if(!dato2.toString().equals(dato1.toString())){
-                      manda1.writeUTF(dato2.toString());
+                manda1.writeUTF(dato2.toString());
                 System.out.println("Enviando la ip: " + dato2 + " a: " + dato1);   
-                }
-              
                 manda1.close();
         conecta1.close();
         }
