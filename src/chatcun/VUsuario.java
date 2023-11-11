@@ -73,6 +73,8 @@ private JComboBox<String> comboBox;
         jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
 
+        CBDirec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuarios conectados" }));
+
         jButton1.setText("Seleccionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
