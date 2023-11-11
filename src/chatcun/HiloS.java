@@ -44,22 +44,38 @@ public class HiloS extends Thread {
                       }
                      if (!desconectado.equals("se ha desconectado")) {
                        UsuariosModel.addRow(new Object[]{ partes[0],ip});  
-		int filas = UsuariosModel.getRowCount();
-for (int fila1 = 0; fila1 < filas; fila1++) {
-    Object dato1 = UsuariosModel.getValueAt(fila1, 1);
-    Socket conecta1 = new Socket(dato1.toString(), 1213);
-    
-    try {
+try {
+    int numFilas = UsuariosModel.getRowCount();
+    // Itera sobre cada fila de la tabla
+    for (int fila1 = 0; fila1 < numFilas; fila1++) {
+        Object dato1 = UsuariosModel.getValueAt(fila1, 1);
+        System.out.println("Enviando a: " + dato1);
+        Socket conecta1 = new Socket(dato1.toString(), 1213);
         DataOutputStream manda1 = new DataOutputStream(conecta1.getOutputStream());
-        
-        for (int fila2 = 0; fila2 < filas; fila2++) {
-            Object dato2 = UsuariosModel.getValueAt(fila2, 1);
-            manda1.writeUTF(dato2.toString());
+        // Envía datos desde la IP actual a todas las demás IPs
+        for (int fila2 = 0; fila2 < numFilas; fila2++) {
+                Object dato2 = UsuariosModel.getValueAt(fila2, 1);
+                if (dato2.equals(dato1)){
+                              System.out.println("Se envio un mensaje a: " + dato1);
+                    manda1.writeUTF("usuarios conectados");
+                }else{
+                manda1.writeUTF(dato2.toString());
+                System.out.println("Enviando la ip: " + dato2 + " a: " + dato1);
+                }
+
+            
         }
-    } finally {
+        // Cierra el flujo de salida y la conexión después de enviar datos
+        manda1.close();
         conecta1.close();
+        System.out.println("Conexión cerrada para: " + dato1);
     }
+} catch (IOException e) {
+    e.printStackTrace();
 }
+
+
+
 
  
                       }
