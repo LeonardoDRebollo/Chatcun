@@ -186,13 +186,14 @@ public class Login extends javax.swing.JFrame {
             timer.start();
  
             JOptionPane.showMessageDialog(null, "Acceso correcto");  
-             Socket conecta;
+
 			try {
-				conecta = new Socket("192.168.1.70",1212);
+				 Socket conecta = new Socket("192.168.1.70",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String envio = TxtUsuario.getText() + "se ha conectado";
 				manda.writeUTF(envio);
 				manda.close();
+                                 conecta.close();
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
 				e0.printStackTrace();
@@ -200,35 +201,14 @@ public class Login extends javax.swing.JFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+           
             VUsuario h = new VUsuario(TxtUsuario.getText());
             h.setVisible(true);
            
             // Cierra el formulario de inicio de sesión solo si el acceso es correcto
             this.dispose();
         } else {
-            intentosFallidos++;
-            if (intentosFallidos > 3) {
-                int segundos = 1; // Establece la cantidad de segundos antes de redirigir al usuario
-                JOptionPane.showMessageDialog(null, "Demasiados intentos fallidos. Volviendo a la página de registro en " + segundos + " segundos.");
-
-                // Bloquea los campos de texto
-                TxtUsuario.setEnabled(false);
-                TxtPass.setEnabled(false);
-
-                // Crea un temporizador (Timer) para redirigir al usuario después de ciertos segundos
-                Timer timer = new Timer(segundos * 1000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        //Registro h = new Registro();
-                        //h.setVisible(true);
-                        Login.this.dispose();
-                    }
-                });
-                timer.setRepeats(false); // Evita que el temporizador se repita
-                timer.start();
-            } else {
-                JOptionPane.showMessageDialog(null, "Contraseña/usuario incorrectos");
-            }
+           JOptionPane.showMessageDialog(null, "Contraseña/usuario incorrectos");
         }
         
         

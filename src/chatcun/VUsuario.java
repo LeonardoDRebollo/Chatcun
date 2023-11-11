@@ -36,6 +36,7 @@ private JComboBox<String> comboBox;
         HiloUsuario2 hilo2 = new HiloUsuario2(comboBoxModel);
         hilo2.start();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,6 +175,7 @@ private JComboBox<String> comboBox;
 				manda.writeUTF(cadena);
                                 TxtMen.setText("");
 				manda.close();
+                                conecta.close();
 			} catch (UnknownHostException e0) {
 				// TODO Auto-generated catch block
 				e0.printStackTrace();
@@ -195,7 +197,7 @@ private JComboBox<String> comboBox;
             
    
 			try {
-			Socket conecta = new Socket("192.168.1.67",1212);
+			Socket conecta = new Socket("192.168.1.70",1212);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String paquete = usuario + ",se ha desconectado";
 				manda.writeUTF(paquete);
@@ -209,9 +211,7 @@ private JComboBox<String> comboBox;
 				e1.printStackTrace();
 			}
                      
-        Login lg = new Login();
-        lg.show();
-        this.dispose();
+       System.exit(0);
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     /**
