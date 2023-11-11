@@ -6,7 +6,4 @@ Name:Diego
 Username:Bt
 Password:123
 
-Name:Leonardo Daniel
-Username:leni
-Password:123
 
