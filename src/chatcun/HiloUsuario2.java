@@ -27,7 +27,6 @@ public class HiloUsuario2 extends Thread {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         // Limpia el modelo antes de añadir el nuevo elemento
-                        comboBoxModel.removeAllElements();
                         comboBoxModel.addElement(texto);
                     }
                 });
