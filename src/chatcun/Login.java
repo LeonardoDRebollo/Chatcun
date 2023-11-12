@@ -97,9 +97,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        TxtUsuario.setText("leni");
-
-        TxtPass.setText("123");
         TxtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtPassActionPerformed(evt);

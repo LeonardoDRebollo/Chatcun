@@ -27,7 +27,7 @@ public class HiloS extends Thread {
     
     public void run() {
 		try {
-			ServerSocket servidor = new ServerSocket(1212);
+			ServerSocket servidor = new ServerSocket(6001);
 	        while(true) {
 	        	Socket conecta = servidor.accept();
 	        	String ip;
@@ -51,7 +51,7 @@ try {
         System.out.println("Enviando a: " + dato1);
         for (int fila2 = 0; fila2 < UsuariosModel.getRowCount(); fila2++) {
 
-             Socket conecta1 = new Socket(dato1.toString(), 1213);
+             Socket conecta1 = new Socket(dato1.toString(), 6003);
          DataOutputStream manda1 = new DataOutputStream(conecta1.getOutputStream());
                 Object dato2 = UsuariosModel.getValueAt(fila2, 1);
                 Object dato3 = UsuariosModel.getValueAt(fila2, 0);

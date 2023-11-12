@@ -20,7 +20,7 @@ public class HiloUsuario2 extends Thread {
 
     public void run() {
         try {
-            ServerSocket servidor = new ServerSocket(1213);
+            ServerSocket servidor = new ServerSocket(6003);
             while (true) {
                 Socket conecta = servidor.accept();
                 DataInputStream recibe = new DataInputStream(conecta.getInputStream());

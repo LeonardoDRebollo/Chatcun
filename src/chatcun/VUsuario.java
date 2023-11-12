@@ -171,7 +171,7 @@ private JComboBox<String> comboBox;
         String[] partes = cn.split(",");
         
         try {
-				Socket conecta = new Socket("192.168.1.70",1211);
+				Socket conecta = new Socket("192.168.1.70",6002);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String cadena = usuario + ": " + TxtMen.getText() + ',' + partes[1];
 				manda.writeUTF(cadena);
@@ -195,7 +195,7 @@ private JComboBox<String> comboBox;
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
 
 			try {
-			Socket conecta = new Socket("192.168.1.70",1212);
+			Socket conecta = new Socket("192.168.1.70",6001);
 				DataOutputStream manda = new DataOutputStream(conecta.getOutputStream());
                                 String paquete = usuario + ",se ha desconectado";
 				manda.writeUTF(paquete);

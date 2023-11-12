@@ -26,7 +26,7 @@ public class HiloUsuario extends Thread {
     }
     public void run(){
         try {
-			ServerSocket servidor = new ServerSocket(1212);
+			ServerSocket servidor = new ServerSocket(6001);
 	        while(true) {
 	        	Socket conecta = servidor.accept();
 	        	DataInputStream recibe = new DataInputStream(conecta.getInputStream());

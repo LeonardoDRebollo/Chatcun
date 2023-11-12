@@ -22,7 +22,7 @@ public class HiloMensajes extends Thread{
     
 public void run(){
         try {
-			ServerSocket servidor = new ServerSocket(1211);
+			ServerSocket servidor = new ServerSocket(6002);
 	        while(true) {
 	        	Socket conecta = servidor.accept();
 	        	String ip;
@@ -35,13 +35,13 @@ public void run(){
                         System.out.println(texto);
                         String[] partes = texto.split(",");
                         try {
-				Socket conecta2 = new Socket(partes[1],1212);
+				Socket conecta2 = new Socket(partes[1],6001);
 				DataOutputStream manda = new DataOutputStream(conecta2.getOutputStream());
 				manda.writeUTF(partes[0]);
 				manda.close();
                                 conecta2.close();
                                 
-                                Socket conecta3 = new Socket(ip,1212);
+                                Socket conecta3 = new Socket(ip,6001);
 				DataOutputStream manda2 = new DataOutputStream(conecta3.getOutputStream());
 				manda2.writeUTF(partes[0]);
 				manda2.close();
